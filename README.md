@@ -1,7 +1,7 @@
 #Node Subscriber
 
-## Install depencies
+### Install depencies
 ```
 npm install 
 ```
-## Update broker ip in app.js
+### Update broker ip in app.js
