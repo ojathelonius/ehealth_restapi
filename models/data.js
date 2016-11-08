@@ -1,0 +1,11 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+module.exports = mongoose.model('Data', new Schema({
+    type: String,
+    data: {},
+    client_id: Boolean,
+    timestamp: Number
+}, {
+    collection: 'rasp_sensor'
+}));

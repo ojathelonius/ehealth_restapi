@@ -10,6 +10,7 @@
     },
     "mongodb_info": {
         "url": "mongodb://ehealth:ehealth@ds063856.mlab.com:63856/ojathelonius",
-        "collection": "rasp_sensor"
+        "collection": "rasp_sensor",
+        "secret":"ehealth"
     }
 }
