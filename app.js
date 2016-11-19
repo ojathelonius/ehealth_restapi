@@ -81,7 +81,7 @@ console.log('Connected');
 
 app.get('/setup', function(req, res) {
 
-  var nick = new User({client_id: 'test', password: 'password', admin: false, token: ''});
+  var nick = new User({client_id: 'ehealth', password: 'password', admin: true});
 
   nick.save(function(err) {
     if (err)
@@ -111,8 +111,6 @@ router.post('/authenticate', function(req, res) {
         res.json({success: false, message: 'Authentication failed. Wrong password.'});
       } else {
         var token = jwt.sign({client_id : user.client_id, admin : user.admin}, app.get('superSecret'), {expiresIn: 24000});
-        user.token = token;
-        user.save();
         res.json({success: true, message: 'Token sent !', token: token});
       }
 
@@ -132,7 +130,6 @@ router.use(function(req, res, next) {
         return res.json({success: false, message: 'Failed to authenticate token.'});
       } else {
         req.decoded = decoded;
-        console.log(decoded);
         next();
       }
     });
@@ -243,33 +240,11 @@ router.get('/data/:client_id/:type/:start/:end', function(req, res) {
 
 // Returns true if the user has the permission to access the required data, else returns false
 function verifyToken(req, cb) {
-  var token = req.body.token || req.query.token || req.headers['x-access-token'];
-  var client_id = req.params.client_id;
-
-  if (token) {
-    User.findOne({
-      $or: [
-        {
-          token: token,
-          admin: true
-        }, {
-          token: token,
-          client_id: client_id
-        }
-      ]
-    }, function(err, user) {
-      if (err)
-        throw err;
-      if (!user) {
-        cb(false);
-      } else if (user) {
-        cb(true);
-      }
-
-    });
-
-  } else {
-    cb(false);
+  if(req.decoded.admin){
+    cb(true);
+  }
+  else{
+    cb(req.decoded.client_id == req.params.client_id);
   }
 }
 
