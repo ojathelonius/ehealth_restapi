@@ -110,8 +110,7 @@ router.post('/authenticate', function(req, res) {
       if (user.password != req.body.password) {
         res.json({success: false, message: 'Authentication failed. Wrong password.'});
       } else {
-        var token = '';
-        token = jwt.sign(user, app.get('superSecret'), {expiresIn: 1});
+        var token = jwt.sign({client_id : user.client_id, admin : user.admin}, app.get('superSecret'), {expiresIn: 24000});
         user.token = token;
         user.save();
         res.json({success: true, message: 'Token sent !', token: token});
@@ -133,6 +132,7 @@ router.use(function(req, res, next) {
         return res.json({success: false, message: 'Failed to authenticate token.'});
       } else {
         req.decoded = decoded;
+        console.log(decoded);
         next();
       }
     });
