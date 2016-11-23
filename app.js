@@ -72,11 +72,6 @@ app.use(morgan('dev'));
 
 app.get('/', function(req, res) {
   res.write('NodeJS eHealth secure API \n');
-  res.write('Authentication required to retrieve a temporary token. \n');
-  res.write('Documentation : \n');
-  res.write('\t - Get all users : /api/users/\n');
-  res.write('\t - Get one user : /api/users/<userID>\n');
-
   res.end();
 });
 
@@ -251,4 +246,4 @@ function verifyToken(req, cb) {
   }
 }
 
-app.use('/api', router);
+app.use('/', router);
