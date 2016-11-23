@@ -13,7 +13,10 @@ var Data = require('./models/data');
 var app = express();
 
 // Set port to listen
-var port = process.env.PORT || 3000;
+// var port = process.env.PORT || 3000;
+// Using port 80 for demonstration purposes since other ports are blocked at school. Don't do this, kids
+var port = 80;
+
 
 // Declare db
 var sensorDB = false;
@@ -26,11 +29,23 @@ mongoClient.connect(subscriber_config.mongodb_info.url, function(err, db) {
     console.log('MongoDB connected');
     mongoCollection = db.createCollection(subscriber_config.mongodb_info.collection, {
       strict: true
-    }, function(err, collection) {});
+    }, function(err, collection) {
+      console.log(err);
+    });
     sensorDB = db;
   }
 });
 
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+}
+
+
+console.log("mqtt://" + subscriber_config.broker_info.url + ":" + subscriber_config.broker_info.port.toString());
+console.log( subscriber_config.broker_info.options);
 var client = mqtt.connect("mqtt://" + subscriber_config.broker_info.url + ":" + subscriber_config.broker_info.port.toString(), subscriber_config.broker_info.options);
 
 client.on('connect', function() {
@@ -249,3 +264,4 @@ function verifyToken(req, cb) {
 }
 
 app.use('/api', router);
+app.use(allowCrossDomain);
