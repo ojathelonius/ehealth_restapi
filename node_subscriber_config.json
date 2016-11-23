@@ -1,3 +1,4 @@
+
 {
     "broker_info": {
         "url": "api.johanet.fr",
@@ -5,7 +6,9 @@
         "topic": "ehealth",
         "options": {
             "username": "ehealth",
-            "password": "password"
+            "password": "password",
+            "protocolId": "MQIsdp",
+            "protocolVersion": 3
         }
     },
     "mongodb_info": {

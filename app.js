@@ -15,7 +15,7 @@ var app = express();
 
 // Set port to listen
 // var port = process.env.PORT || 3000;
-// Using port 80 for demonstration purposes since other ports are blocked at school. Don't do this, kids
+// Using port 80 for demonstration purposes since other ports are blocked at school. Don't try this at home !
 var port = 80;
 
 
@@ -24,21 +24,20 @@ var sensorDB = false;
 
 var connection_status;
 
-//Connect to db
+//Connect to MongoDB
 mongoClient.connect(subscriber_config.mongodb_info.url, function(err, db) {
   if (!err) {
-    console.log('MongoDB connected');
+    console.log('Connected to MongoDB !');
     sensorDB = db;
   }
 });
 
 app.use(cors());
-
-console.log("mqtt://" + subscriber_config.broker_info.url + ":" + subscriber_config.broker_info.port.toString());
-console.log( subscriber_config.broker_info.options);
+// Do not forget to add
 var client = mqtt.connect("mqtt://" + subscriber_config.broker_info.url + ":" + subscriber_config.broker_info.port.toString(), subscriber_config.broker_info.options);
 
 client.on('connect', function() {
+  console.log("Connected to the broker, yay !")
   client.subscribe(subscriber_config.broker_info.topic);
   connection_status = true;
 });
@@ -82,7 +81,6 @@ app.get('/', function(req, res) {
 });
 
 app.listen(port);
-console.log('Connected');
 
 app.get('/setup', function(req, res) {
 
