@@ -1,15 +1,15 @@
 {
     "broker_info": {
-        "url": "m21.cloudmqtt.com",
-        "port": 18103,
+        "url": "api.johanet.fr",
+        "port": 1883,
         "topic": "ehealth",
         "options": {
-            "username": "ehealth_user",
-            "password": "ehealth_password"
+            "username": "ehealth",
+            "password": "password"
         }
     },
     "mongodb_info": {
-        "url": "mongodb://ehealth:ehealth@ds063856.mlab.com:63856/ojathelonius",
+        "url": "mongodb://api.johanet.fr:27017/ehealth",
         "collection": "rasp_sensor",
         "secret":"ehealth"
     }
