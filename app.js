@@ -27,11 +27,6 @@ var connection_status;
 mongoClient.connect(subscriber_config.mongodb_info.url, function(err, db) {
   if (!err) {
     console.log('MongoDB connected');
-    mongoCollection = db.createCollection(subscriber_config.mongodb_info.collection, {
-      strict: true
-    }, function(err, collection) {
-      console.log(err);
-    });
     sensorDB = db;
   }
 });
