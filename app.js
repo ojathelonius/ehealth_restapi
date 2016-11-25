@@ -14,10 +14,8 @@ var cors = require('cors');
 var app = express();
 
 // Set port to listen
-// var port = process.env.PORT || 3000;
-// Using port 80 for demonstration purposes since other ports are blocked at school. Don't try this at home !
-var port = 80;
-
+// Insteading of listening to port 80, use port 3000 instead and set a reverse proxy like nginx on the server
+var port = process.env.PORT || 3000;
 
 // Declare db
 var sensorDB = false;
