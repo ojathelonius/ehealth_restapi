@@ -1,0 +1,4 @@
+{
+    "url": "mongodb://mqtt.johanet.fr:27017/ehealth",
+    "secret": "ehealth"
+}

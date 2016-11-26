@@ -1,12 +1,12 @@
-#MQTT eHealth subscriber
+#REST API
 
 ### Install dependencies
 ```
-npm install 
+npm install
 ```
-### Update broker and MongoDB informations in config_node_subscriber.json
+### Update MongoDB informations in mongodb_config.json
 
 ### Run app.js
 ```
-npm node app.js 
+node app.js
 ```
