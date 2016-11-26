@@ -1,7 +1,7 @@
 
 {
     "broker_info": {
-        "url": "api.johanet.fr",
+        "url": "mqtt.johanet.fr",
         "port": 1883,
         "topic": "ehealth",
         "options": {
@@ -12,7 +12,7 @@
         }
     },
     "mongodb_info": {
-        "url": "mongodb://api.johanet.fr:27017/ehealth",
+        "url": "mongodb://mqtt.johanet.fr:27017/ehealth",
         "collection": "rasp_sensor",
         "secret":"ehealth"
     }
