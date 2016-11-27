@@ -101,7 +101,7 @@ router.get('/users', function(req, res) {
 
 router.get('/users/:username', function(req, res) {
   User.find({
-    name: req.params.username
+    client_id: req.params.username
   }, function(err, users) {
     res.json(users);
   });
